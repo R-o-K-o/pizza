@@ -1,6 +1,42 @@
-export const Sort = () => {
+import {useEffect, useRef, useState} from "react";
+
+export const sortList = [
+    {id: 1, title: 'популярності ⬆', sortProperty: 'rating'},
+    {id: 2, title: 'популярності ⬇', sortProperty: '-rating'},
+    {id: 3, title: 'ціні ⬆', sortProperty: 'price'},
+    {id: 4, title: 'ціні ⬇', sortProperty: '-price'},
+    {id: 5, title: 'алфавіту ⬆', sortProperty: 'title'},
+    {id: 6, title: 'алфавіту ⬇', sortProperty: '-title'},
+];
+
+export const Sort = ({sort, onChangeSort}) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const sortRef = useRef(null);
+
+    useEffect(() => {
+        const body = document.body;
+
+        function popupHandler(event) {
+            if (!event.path.includes(sortRef.current)) {
+                setIsOpen(false);
+            }
+        }
+
+        body.addEventListener('click', popupHandler);
+
+        return () => {
+            body.removeEventListener('click', popupHandler);
+        }
+
+    }, []);
+
+    const onClickSortItem = (sortItem) => {
+        onChangeSort(sortItem);
+        setIsOpen(false);
+    };
+
     return (
-        <div className="sort">
+        <div ref={sortRef} className="sort">
             <div className="sort__label">
                 <svg
                     width="10"
@@ -14,16 +50,28 @@ export const Sort = () => {
                         fill="#2C2C2C"
                     />
                 </svg>
-                <b>Сортування за:</b>
-                <span>популярністю</span>
+                <b>Сортування по:</b>
+                <span onClick={() => setIsOpen(prevState => !prevState)}>{sort.title}</span>
             </div>
-            <div className="sort__popup">
-                <ul>
-                    <li className="active">популярністю</li>
-                    <li>ціною</li>
-                    <li>алфавітом</li>
-                </ul>
-            </div>
+            {
+                isOpen && (
+                    <div className="sort__popup">
+                        <ul>
+                            {
+                                sortList.map(sortItem =>
+                                    <li
+                                        onClick={() => onClickSortItem(sortItem)}
+                                        className={sort.sortProperty === sortItem.sortProperty ? 'active' : ''}
+                                        key={sortItem.id}
+                                    >
+                                        {sortItem.title}
+                                    </li>
+                                )
+                            }
+                        </ul>
+                    </div>
+                )
+            }
         </div>
     );
 };

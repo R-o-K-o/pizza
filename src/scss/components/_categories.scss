@@ -5,11 +5,11 @@
     display: flex;
 
     li {
-      background-color: #f9f9f9;
-      padding: 13px 30px;
-      border-radius: 30px;
-      margin-right: 10px;
       font-weight: bold;
+      padding: 13px 30px;
+      margin-right: 10px;
+      border-radius: 30px;
+      background-color: #f9f9f9;
       cursor: pointer;
       transition: background-color 0.1s ease-in-out;
       @include noselect();
@@ -23,8 +23,8 @@
       }
 
       &.active {
-        background-color: #282828;
         color: #fff;
+        background-color: #282828;
       }
     }
   }

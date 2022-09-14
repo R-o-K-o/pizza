@@ -1,26 +1,53 @@
-export const PizzaCard = () => {
+import {useState} from "react";
+import {Link} from "react-router-dom";
+
+const typeDough = ['тонке', 'традиційне'];
+
+export const PizzaCard = ({pizza: {id, title, price, types, sizes, imageUrl}}) => {
+    const [selectedType, setSelectedType] = useState(0);
+    const [selectedSize, setSelectedSize] = useState(0);
+
     return (
         <div className="pizza-card-wrapper">
             <div className="pizza-card">
-                <img
-                    className="pizza-card__image"
-                    src="https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg"
-                    alt="Pizza"
-                />
-                <h4 className="pizza-card__title">Чізбургер-піца</h4>
+                <Link to={'/details'}>
+                    <img
+                        className="pizza-card__image"
+                        src={imageUrl}
+                        alt="Pizza"
+                    />
+                    <h4 className="pizza-card__title">{title}</h4>
+                </Link>
                 <div className="pizza-card__selector">
                     <ul>
-                        <li className="active">тонкое</li>
-                        <li>традиционное</li>
+                        {
+                            types.map(type =>
+                                <li
+                                    onClick={() => setSelectedType(type)}
+                                    key={type}
+                                    className={selectedType === type ? 'active' : ''}
+                                >
+                                    {typeDough[type]}
+                                </li>
+                            )
+                        }
                     </ul>
                     <ul>
-                        <li className="active">26 см.</li>
-                        <li>30 см.</li>
-                        <li>40 см.</li>
+                        {
+                            sizes.map(size =>
+                                <li
+                                    onClick={() => setSelectedSize(size)}
+                                    key={size}
+                                    className={selectedSize === size ? 'active' : ''}
+                                >
+                                    {`${size} см`}
+                                </li>
+                            )
+                        }
                     </ul>
                 </div>
                 <div className="pizza-card__bottom">
-                    <div className="pizza-card__price">від 395 грн</div>
+                    <div className="pizza-card__price">від {price} грн</div>
                     <div className="button button--outline button--add">
                         <svg
                             width="12"

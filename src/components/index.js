@@ -5,3 +5,4 @@ export * from './Category/Category';
 export * from './Sort/Sort';
 export * from './PizzaCards/PizzaCards';
 export * from './PizzaCard/PizzaCard';
+export * from './Skeleton/Skeleton';

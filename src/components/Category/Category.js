@@ -1,12 +1,10 @@
-export const Category = () => {
+export const Category = ({category: {id, title}, activeCategory, onChangeCategory}) => {
     return (
-        <>
-            <li className="active">Всі</li>
-            <li>М'ясні</li>
-            <li>Вегетаріанська</li>
-            <li>Гриль</li>
-            <li>Гострі</li>
-            <li>Закриті</li>
-        </>
+        <li
+            onClick={() => onChangeCategory(id)}
+            className={activeCategory === id ? 'active' : ''}
+        >
+            {title}
+        </li>
     );
 };

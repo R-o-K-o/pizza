@@ -1,16 +1,9 @@
 import {PizzaCard} from "../PizzaCard/PizzaCard";
 
-export const PizzaCards = () => {
+export const PizzaCards = ({pizzas}) => {
     return (
-        <div className="content__items">
-            <PizzaCard/>
-            <PizzaCard/>
-            <PizzaCard/>
-            <PizzaCard/>
-            <PizzaCard/>
-            <PizzaCard/>
-            <PizzaCard/>
-            <PizzaCard/>
-        </div>
+        <>
+            {pizzas.map(pizza => <PizzaCard key={pizza.id} pizza={pizza}/>)}
+        </>
     );
 };
