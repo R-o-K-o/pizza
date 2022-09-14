@@ -1,9 +1,10 @@
 import {combineReducers, configureStore} from "@reduxjs/toolkit";
 
-import {pizzaReducer} from "../slices";
+import {filterReducer, pizzaReducer} from "../slices";
 
 const rootReducer = combineReducers({
     pizzaReducer,
+    filterReducer,
 });
 
 export const store = configureStore({

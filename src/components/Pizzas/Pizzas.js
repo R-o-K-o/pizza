@@ -11,6 +11,7 @@ import {pizzaActions} from "../../redux";
 
 export const Pizzas = () => {
     const {pizzas, isLoading} = useSelector(state => state.pizzaReducer);
+    const {searchValue} = useSelector(state => state.filterReducer);
     const [categoryId, setCategoryId] = useState(0);
     const [sort, setSort] = useState({id: 1, title: 'популярності ⬆', sortProperty: 'rating'});
     const [currentPage, setCurrentPage] = useState(1);
@@ -22,13 +23,15 @@ export const Pizzas = () => {
             sortBy: sort.sortProperty.replace('-', ''),
             order: sort.sortProperty.includes('-') ? 'asc' : 'desc',
             page: currentPage,
+            search: searchValue,
         };
 
         dispatch(pizzaActions.getAll({params}))
 
         window.scrollTo(0,0);
-    }, [categoryId, sort.sortProperty, currentPage]);
+    }, [categoryId, sort.sortProperty, currentPage, searchValue]);
 
+    const pizzaList = !searchValue ? pizzas : pizzas.filter(pizza => pizza.title.toLowerCase().includes(searchValue));
 
     const onChangeCategory = (id) => setCategoryId(id);
 
@@ -49,7 +52,7 @@ export const Pizzas = () => {
                 {
                     isLoading
                         ? skeletons
-                        : <PizzaCards pizzas={pizzas}/>
+                        : <PizzaCards pizzas={pizzaList}/>
                 }
             </div>
             {
