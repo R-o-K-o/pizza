@@ -47,7 +47,7 @@ export const PizzaCard = ({pizza: {id, title, price, types, sizes, imageUrl}}) =
                     </ul>
                 </div>
                 <div className="pizza-card__bottom">
-                    <div className="pizza-card__price">від {price} грн</div>
+                    <div className="pizza-card__price">від {price} ₴</div>
                     <div className="button button--outline button--add">
                         <svg
                             width="12"
