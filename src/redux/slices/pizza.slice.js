@@ -11,9 +11,9 @@ const getAll = createAsyncThunk(
     'pizza/getAll',
     async ({params}) => {
         try {
-            const {category, sortBy, order} = params;
+            const {category, sortBy, order, page} = params;
 
-            const {data} = await pizzaService.getAll(category, sortBy, order);
+            const {data} = await pizzaService.getAll(category, sortBy, order, page);
             return data;
         }
         catch (err) {

@@ -6,3 +6,4 @@ export * from './Sort/Sort';
 export * from './PizzaCards/PizzaCards';
 export * from './PizzaCard/PizzaCard';
 export * from './Skeleton/Skeleton';
+export * from './Pagination/Pagination';
