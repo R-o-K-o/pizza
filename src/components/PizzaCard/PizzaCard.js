@@ -1,16 +1,18 @@
 import {useState} from "react";
 import {Link} from "react-router-dom";
 
-const typeDough = ['тонке', 'традиційне'];
+export const typeDough = ['тонке', 'традиційне'];
 
-export const PizzaCard = ({pizza: {id, title, price, types, sizes, imageUrl}}) => {
+export const PizzaCard = ({pizza}) => {
+    const {id, title, price, types, sizes, imageUrl} = pizza;
+
     const [selectedType, setSelectedType] = useState(0);
     const [selectedSize, setSelectedSize] = useState(0);
 
     return (
         <div className="pizza-card-wrapper">
             <div className="pizza-card">
-                <Link to={'/details'}>
+                <Link to={`/pizza-details/${id}`} state={pizza}>
                     <img
                         className="pizza-card__image"
                         src={imageUrl}

@@ -9,7 +9,7 @@
     align-items: center;
     justify-content: space-between;
 
-    @media (max-width: 645px) {
+    @media (max-width: 950px) {
       flex-direction: column;
 
       .header__cart {
@@ -23,6 +23,16 @@
 
     img {
       margin-right: 15px;
+
+      @media (max-width: 950px) {
+        padding-bottom: 15px;
+      }
+    }
+
+    div {
+      @media (max-width: 950px) {
+        margin-bottom: 15px;
+      }
     }
 
     h1 {

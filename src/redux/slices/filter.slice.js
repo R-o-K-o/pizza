@@ -1,24 +1,66 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
+    categoryId: 0,
+    sortType: {
+        id: 1,
+        title: 'популярності ⬆',
+        sortProperty: 'rating',
+    },
     searchValue: '',
+    currentPage: 1,
 };
 
 const filterSlice = createSlice({
     name: 'filter',
     initialState,
     reducers: {
+        setCategoryId: (state, action) => {
+            state.categoryId = action.payload;
+        },
+
+        setSortType: (state, action) => {
+            state.sortType = action.payload;
+        },
+
         setSearchValue: (state, action) => {
-          state.searchValue = action.payload;
+            state.searchValue = action.payload;
+        },
+
+        setCurrentPage: (state, action) => {
+            state.currentPage = action.payload;
+        },
+
+        resetFilters: (state) => {
+            state.categoryId = 0;
+            state.sortType = {
+                id: 1,
+                title: 'популярності ⬆',
+                sortProperty: 'rating',
+            };
+            state.searchValue = '';
+            state.currentPage = 1;
         },
     },
-    extraReducers: {}
 });
 
-const {reducer: filterReducer, actions: {setSearchValue}} = filterSlice;
+const {
+    reducer: filterReducer,
+    actions: {
+        setCategoryId,
+        setSortType,
+        setSearchValue,
+        setCurrentPage,
+        resetFilters,
+    }
+} = filterSlice;
 
-export const filterActions = {
+const filterActions = {
+    setCategoryId,
+    setSortType,
     setSearchValue,
+    setCurrentPage,
+    resetFilters,
 };
 
-export {filterReducer};
+export {filterReducer, filterActions};

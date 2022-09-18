@@ -3,13 +3,18 @@ import {Link} from "react-router-dom";
 import logoSvg from '../../assets/img/pizza-logo.svg'
 
 import {Search} from "../Search/Search";
+import {useDispatch} from "react-redux";
+
+import {filterActions} from "../../redux";
 
 export const Header = () => {
+    const dispatch = useDispatch();
+
     return (
         <div className="header">
             <div className="container">
                 <Link to={'/'}>
-                    <div className="header__logo">
+                    <div onClick={() => dispatch(filterActions.resetFilters())} className="header__logo">
                         <img width="38" src={logoSvg} alt="Pizza logo"/>
                         <div>
                             <h1>React Pizza</h1>

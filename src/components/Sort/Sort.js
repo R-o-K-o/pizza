@@ -1,4 +1,7 @@
 import {useEffect, useRef, useState} from "react";
+import {useDispatch} from "react-redux";
+
+import {filterActions} from "../../redux";
 
 export const sortList = [
     {id: 1, title: 'популярності ⬆', sortProperty: 'rating'},
@@ -9,9 +12,10 @@ export const sortList = [
     {id: 6, title: 'алфавіту ⬇', sortProperty: '-title'},
 ];
 
-export const Sort = ({sort, onChangeSort}) => {
+export const Sort = ({sortType}) => {
     const [isOpen, setIsOpen] = useState(false);
     const sortRef = useRef(null);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const body = document.body;
@@ -26,12 +30,12 @@ export const Sort = ({sort, onChangeSort}) => {
 
         return () => {
             body.removeEventListener('click', popupHandler);
-        }
+        };
 
     }, []);
 
     const onClickSortItem = (sortItem) => {
-        onChangeSort(sortItem);
+        dispatch(filterActions.setSortType(sortItem));
         setIsOpen(false);
     };
 
@@ -51,7 +55,7 @@ export const Sort = ({sort, onChangeSort}) => {
                     />
                 </svg>
                 <b>Сортування по:</b>
-                <span onClick={() => setIsOpen(prevState => !prevState)}>{sort.title}</span>
+                <span onClick={() => setIsOpen(prevState => !prevState)}>{sortType.title}</span>
             </div>
             {
                 isOpen && (
@@ -61,7 +65,7 @@ export const Sort = ({sort, onChangeSort}) => {
                                 sortList.map(sortItem =>
                                     <li
                                         onClick={() => onClickSortItem(sortItem)}
-                                        className={sort.sortProperty === sortItem.sortProperty ? 'active' : ''}
+                                        className={sortType.sortProperty === sortItem.sortProperty ? 'active' : ''}
                                         key={sortItem.id}
                                     >
                                         {sortItem.title}

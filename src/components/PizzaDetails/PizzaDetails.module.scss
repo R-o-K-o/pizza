@@ -1,0 +1,27 @@
+.pizza_details_wrapper {
+  display: flex;
+  justify-content: center;
+
+  .pizza_card {
+    width: 280px;
+    text-align: center;
+    margin-bottom: 65px;
+
+    &__image {
+      width: 260px;
+    }
+
+    &__title {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: 0.01rem;
+      margin-bottom: 20px;
+    }
+
+    &__description {
+      text-align: justify;
+      color: #7b7b7b;
+    }
+  }
+
+}

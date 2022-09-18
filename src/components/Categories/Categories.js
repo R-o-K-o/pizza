@@ -9,7 +9,7 @@ const categories = [
     {id: 5, title: "Сирні"},
 ];
 
-export const Categories = ({activeCategory, onChangeCategory}) => {
+export const Categories = ({activeCategory, changeCategoryClick}) => {
     return (
         <div className="categories">
             <ul>
@@ -19,7 +19,7 @@ export const Categories = ({activeCategory, onChangeCategory}) => {
                             key={category.id}
                             category={category}
                             activeCategory={activeCategory}
-                            onChangeCategory={onChangeCategory}
+                            changeCategoryClick={changeCategoryClick}
                         />
                     )
                 }

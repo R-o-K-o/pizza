@@ -1,7 +1,7 @@
-export const Category = ({category: {id, title}, activeCategory, onChangeCategory}) => {
+export const Category = ({category: {id, title}, activeCategory, changeCategoryClick}) => {
     return (
         <li
-            onClick={() => onChangeCategory(id)}
+            onClick={() => changeCategoryClick(id)}
             className={activeCategory === id ? 'active' : ''}
         >
             {title}

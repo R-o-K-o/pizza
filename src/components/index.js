@@ -8,3 +8,4 @@ export * from './PizzaCard/PizzaCard';
 export * from './Skeleton/Skeleton';
 export * from './Search/Search';
 export * from './Pagination/Pagination';
+export * from './PizzaDetails/PizzaDetails';
