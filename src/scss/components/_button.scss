@@ -10,7 +10,6 @@
   background-color: $orange;
   transition: background-color $duration ease-in-out, border-color $duration ease-in-out;
   cursor: pointer;
-  @include noselect();
 
   &,
   span {

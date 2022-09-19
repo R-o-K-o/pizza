@@ -27,11 +27,12 @@ export const Pizzas = () => {
 
         window.scrollTo(0,0);
 
-    }, [categoryId, sortType.sortProperty, currentPage, searchValue]);
+    }, [categoryId, sortType.sortProperty, currentPage, searchValue, dispatch]);
 
     const pizzaList = !searchValue ? pizzas : pizzas.filter(pizza => pizza.title.toLowerCase().includes(searchValue));
 
     const changeCategoryClick = (id) => dispatch(filterActions.setCategoryId(id));
+
     const changePageClick = (page) => dispatch(filterActions.setCurrentPage(page));
 
     const skeletons = [...new Array(6)].map((item, index) => <Skeleton key={index}/>);
@@ -39,7 +40,9 @@ export const Pizzas = () => {
     return (
         <div className="container">
             <div className="content__top">
-                <Categories activeCategory={categoryId} changeCategoryClick={changeCategoryClick}/>
+                <Categories activeCategory={categoryId}
+                            changeCategoryClick={changeCategoryClick}
+                />
                 <Sort sortType={sortType}/>
             </div>
             <h2 className="content__title">Усі піци</h2>
@@ -51,7 +54,9 @@ export const Pizzas = () => {
                 }
             </div>
             {
-                !categoryId && <Pagination currentPage={currentPage} changePageClick={changePageClick}/>
+                !categoryId && <Pagination currentPage={currentPage}
+                                           changePageClick={changePageClick}
+                               />
             }
         </div>
     );

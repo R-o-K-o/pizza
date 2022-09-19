@@ -47,7 +47,6 @@
         font-weight: 600;
         padding: 8px;
         cursor: pointer;
-        @include noselect();
 
         &.active {
           border-radius: 5px;

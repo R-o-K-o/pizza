@@ -33,13 +33,13 @@ const filterSlice = createSlice({
 
         resetFilters: (state) => {
             state.categoryId = 0;
+            state.searchValue = '';
+            state.currentPage = 1;
             state.sortType = {
                 id: 1,
                 title: 'популярності ⬆',
                 sortProperty: 'rating',
             };
-            state.searchValue = '';
-            state.currentPage = 1;
         },
     },
 });

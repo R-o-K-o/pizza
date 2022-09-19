@@ -5,19 +5,22 @@ import {PizzaDetails} from "../../components";
 
 import {pizzaService} from "../../services";
 
-
 export const ChosenPizza = () => {
     const {id} = useParams();
     const {state} = useLocation();
     const [pizza, setPizza] = useState({});
-    // console.log(state)
 
     useEffect(() => {
         if (state) {
             setPizza(state);
         }
         else {
-            pizzaService.getById(id).then(({data}) => setPizza(data));
+            try {
+                pizzaService.getById(id).then(({data}) => setPizza(data));
+            }
+            catch (err) {
+                console.log(err.message);
+            }
         }
 
     }, [id, state]);

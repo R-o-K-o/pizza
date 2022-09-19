@@ -369,8 +369,9 @@ body {
 
       .pay-btn {
         width: 210px;
-        font-size: 16px;
+        font-size: 19px;
         font-weight: 600;
+        letter-spacing: 0.02rem;
         padding: 16px;
       }
     }
@@ -401,6 +402,7 @@ body {
 
     img {
       width: 300px;
+      height: 250px;
       display: block;
       margin: 45px auto 60px;
     }

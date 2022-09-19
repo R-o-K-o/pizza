@@ -1,6 +1,8 @@
 import {useEffect, useRef, useState} from "react";
 import {useDispatch} from "react-redux";
 
+import {SortPopup} from "../SortPopup/SortPopup";
+
 import {filterActions} from "../../redux";
 
 export const sortList = [
@@ -34,7 +36,7 @@ export const Sort = ({sortType}) => {
 
     }, []);
 
-    const onClickSortItem = (sortItem) => {
+    const sortItemClick = (sortItem) => {
         dispatch(filterActions.setSortType(sortItem));
         setIsOpen(false);
     };
@@ -55,24 +57,16 @@ export const Sort = ({sortType}) => {
                     />
                 </svg>
                 <b>Сортування по:</b>
-                <span onClick={() => setIsOpen(prevState => !prevState)}>{sortType.title}</span>
+                <span onClick={() => setIsOpen(prevState => !prevState)}>
+                    {sortType.title}
+                </span>
             </div>
             {
                 isOpen && (
                     <div className="sort__popup">
-                        <ul>
-                            {
-                                sortList.map(sortItem =>
-                                    <li
-                                        onClick={() => onClickSortItem(sortItem)}
-                                        className={sortType.sortProperty === sortItem.sortProperty ? 'active' : ''}
-                                        key={sortItem.id}
-                                    >
-                                        {sortItem.title}
-                                    </li>
-                                )
-                            }
-                        </ul>
+                        <SortPopup sortType={sortType}
+                                   sortItemClick={sortItemClick}
+                        />
                     </div>
                 )
             }

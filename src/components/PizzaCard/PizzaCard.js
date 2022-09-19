@@ -1,13 +1,32 @@
 import {useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
+
+import {cartActions} from "../../redux";
+import {findItem} from "../../utils";
 
 export const typeDough = ['тонке', 'традиційне'];
 
 export const PizzaCard = ({pizza}) => {
     const {id, title, price, types, sizes, imageUrl} = pizza;
 
+    const {items} = useSelector(state => state.cartReducer);
     const [selectedType, setSelectedType] = useState(0);
     const [selectedSize, setSelectedSize] = useState(0);
+    const dispatch = useDispatch();
+
+    const item = {
+        id,
+        title,
+        price,
+        imageUrl,
+        type: typeDough[selectedType],
+        size: sizes[selectedSize],
+    };
+
+    const addItemClick = () => dispatch(cartActions.addItem(item));
+
+    const addedCount = findItem(items, item) ? findItem(items, item).count : 0;
 
     return (
         <div className="pizza-card-wrapper">
@@ -36,11 +55,11 @@ export const PizzaCard = ({pizza}) => {
                     </ul>
                     <ul>
                         {
-                            sizes.map(size =>
+                            sizes.map((size, i) =>
                                 <li
-                                    onClick={() => setSelectedSize(size)}
+                                    onClick={() => setSelectedSize(i)}
                                     key={size}
-                                    className={selectedSize === size ? 'active' : ''}
+                                    className={selectedSize === i ? 'active' : ''}
                                 >
                                     {`${size} см`}
                                 </li>
@@ -50,7 +69,10 @@ export const PizzaCard = ({pizza}) => {
                 </div>
                 <div className="pizza-card__bottom">
                     <div className="pizza-card__price">від {price} ₴</div>
-                    <div className="button button--outline button--add">
+                    <button
+                        onClick={addItemClick}
+                        className="button button--outline button--add"
+                    >
                         <svg
                             width="12"
                             height="12"
@@ -64,8 +86,8 @@ export const PizzaCard = ({pizza}) => {
                             />
                         </svg>
                         <span>Додати</span>
-                        <i>2</i>
-                    </div>
+                        {addedCount > 0 && <i>{addedCount}</i>}
+                    </button>
                 </div>
             </div>
         </div>
